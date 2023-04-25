@@ -3,9 +3,8 @@
 #include "commons.h"
 #include <string>
 #include "Texture2D.h"
+#include "levelmap.h"
 using namespace std;
-
-class Texture2D;
 
 
 class Character
@@ -28,7 +27,7 @@ protected:
 	float m_collision_radius;
 
 public:
-	Character(SDL_Renderer* renderer, string imagePath, Vector2D start_position);
+	Character(SDL_Renderer* renderer, string imagepath, Vector2D start_position, levelmap* map);
 	~Character();
 	virtual void AddGravity(float deltaTime);
 	virtual void Render();
@@ -38,8 +37,8 @@ public:
 	float GetCollisionradius();
 	Rect2D GetCollisionBox() { return Rect2D(m_position.x, m_position.y, m_texture->GetWidth(), m_texture->GetHeight()); }
 
-public:
-	Character(SDL_Renderer* renderer, string imagepath, Vector2D start_position, levelmap* map);
+private:
+	levelmap* m_current_level_map;
 
 
 };

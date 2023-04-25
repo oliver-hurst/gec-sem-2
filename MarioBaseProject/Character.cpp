@@ -19,9 +19,9 @@ void Character::MoveRight(float deltaTime)
 	m_position.x += deltaTime * MOVESPEED;
 }
 
-Character::Character(SDL_Renderer* renderer, string imagePath, Vector2D start_position)
+Character::Character(SDL_Renderer* renderer, string imagePath, Vector2D start_position, levelmap* level)
 {
-	
+	m_current_level_map = level;
 	m_moving_left = false;
 	m_moving_right = false;
 	m_facing_direction = FACING_RIGHT;
@@ -77,6 +77,19 @@ void Character::Render()
 
 void Character::Update(float deltaTime, SDL_Event e)
 {
+
+	int centralX_position = (int)(m_position.x + (m_texture->GetWidth() * 0.5)) / TILE_WIDTH;
+	int foot_position = (int)(m_position.y + m_texture->GetHeight()) / TILE_HEIGHT;
+	if (m_current_level_map->GetTileArt(foot_position, centralX_position) == 0) 
+	{
+		AddGravity(deltaTime);
+
+	}
+	else
+	{
+		//colided with ground, can jump again
+		m_can_jump = true;
+	}
 	if (m_jumping)
 	{
 		m_position.y -= m_jump_force * deltaTime;
@@ -87,8 +100,6 @@ void Character::Update(float deltaTime, SDL_Event e)
 			m_jumping = false;
 
 	}
-	AddGravity(deltaTime);
-
 
 	if (m_moving_right)
 	{
@@ -116,9 +127,4 @@ float Character::GetCollisionradius()
 	m_collision_radius = 15.0f;
 	return m_collision_radius;
 }
-
-Character::Character(SDL_Renderer* renderer, string imagepath, Vector2D start_position, levelmap* map)
-{
-}
-
 

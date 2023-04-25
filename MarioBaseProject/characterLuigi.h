@@ -1,6 +1,5 @@
 #pragma once
 #include "Character.h"
-#include "levelmap.h"
 
 class characterLuigi : public Character
 {

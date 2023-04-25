@@ -7,6 +7,8 @@
 #include "Texture2D.h"
 #include "commons.h"
 #include "GameScreenManager.h"
+#include <SDL_mixer.h>
+
 
 
 using namespace std;
@@ -15,7 +17,7 @@ SDL_Window* g_window = nullptr;
 SDL_Renderer* g_renderer = nullptr;
 GameScreenManager* game_screen_manager;
 Uint32 g_old_time;
-
+Mix_Music* g_music = nullptr;
 
 
 //function prototypes
@@ -23,13 +25,18 @@ bool InitSDL();
 void CLoseSDL();
 bool Update();
 void render();
-
+void loadmusic();
 
 
 int main(int argc, char* args[])
 {
 	if (InitSDL())
 	{
+		loadmusic("music/Mario.mp3");
+		if (Mix_PlayingMusic() == 0)
+		{
+			Mix_PlayMusic(g_music, -1);
+		}
 		game_screen_manager = new GameScreenManager(g_renderer, SCREEN_LEVEL1);
 		//set time
 		g_old_time = SDL_GetTicks();
@@ -118,6 +125,21 @@ void render()
 		//update screen
 	SDL_RenderPresent(g_renderer);
 	
+}
+
+void loadmusic()
+{
+	g_music = Mix_LoadMUS(path.c_str());
+	if (g_music == nullptr)
+	{
+		cout << " couldnt load file" << Mix_GetError() << endl;
+	}
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+	{
+		cout << "mixter couldnt init" << Mix_GetError();
+		return false;
+	}
+
 }
 
 void CLoseSDL() 

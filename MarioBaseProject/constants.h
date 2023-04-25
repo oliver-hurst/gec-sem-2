@@ -8,6 +8,8 @@
 #define INITAL_JUMP_FORCE 600
 #define MAP_HEIGHT 13 
 #define MAP_WIDTH 16
+#define TILE_WIDTH 32
+#define TILE_HEIGHT 32
 
 
 class constants

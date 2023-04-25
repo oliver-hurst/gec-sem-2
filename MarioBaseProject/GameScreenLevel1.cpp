@@ -5,19 +5,19 @@
 
 bool GameScreenLevel1::SetUpLevel1()
 {
+	SetLevelMap();
 	//set up player
-	steven = new characterMario(m_renderer, "images/Mario.png", Vector2D(64, 330));
+	steven = new characterMario(m_renderer, "images/Mario.png", Vector2D(64, 330), m_level_map);
 	//interduce luigi
-	matt = new characterLuigi(m_renderer, "images/Luigi.png", Vector2D(64, 330));
+	matt = new characterLuigi(m_renderer, "images/Luigi.png", Vector2D(64, 330), m_level_map);
 	/*load texture*/
 	m_backround_texture = new Texture2D(m_renderer);
-	if (!m_backround_texture->LoadDFromFile("images/test.bmp"))
+	if (!m_backround_texture->LoadDFromFile("images/backround.png"))
 	{
 		std::cout << "failed to load backround texture" << std::endl;
 		return false;
 
 	}
-	m_level_map = nullptr;
 	
 }
 
@@ -34,6 +34,10 @@ GameScreenLevel1::~GameScreenLevel1()
 	m_backround_texture = nullptr;
 	delete matt;
 	matt = nullptr;
+	if (m_level_map != nullptr)
+	{
+		delete m_level_map;
+	}
 }
 
 void GameScreenLevel1::Render()
@@ -73,10 +77,6 @@ void GameScreenLevel1::SetLevelMap()
 					  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
 					  { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
 					  { 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 } };
-	if (m_level_map != nullptr) 
-	{
-		delete m_level_map;
-    }
 
 	m_level_map = new levelmap(map);
 

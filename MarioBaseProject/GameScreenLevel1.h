@@ -3,17 +3,9 @@
 #include "Texture2D.h"
 #include "commons.h"
 #include <SDL.h>
-#include "Character.h"
 #include "characterMario.h"
 #include "characterLuigi.h"
 #include "levelmap.h"
-
-
-
-class Character;
-
-class Texture2D;
-
 
 class GameScreenLevel1 : GameScreen
 {
