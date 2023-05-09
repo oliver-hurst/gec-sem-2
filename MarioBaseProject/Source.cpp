@@ -25,7 +25,7 @@ bool InitSDL();
 void CLoseSDL();
 bool Update();
 void render();
-void loadmusic();
+void loadmusic(string path);
 
 
 int main(int argc, char* args[])
@@ -37,6 +37,7 @@ int main(int argc, char* args[])
 		{
 			Mix_PlayMusic(g_music, -1);
 		}
+		
 		game_screen_manager = new GameScreenManager(g_renderer, SCREEN_LEVEL1);
 		//set time
 		g_old_time = SDL_GetTicks();
@@ -79,7 +80,7 @@ bool InitSDL()
 	if (SDL_Init(SDL_INIT_VIDEO) < 0) 
 	{
 		cout << "SDL did not initalise. error" << SDL_GetError();
-		return false();
+		return false;
 	}
 	else
 	{
@@ -106,6 +107,12 @@ bool InitSDL()
 			cout << " renderer didnt initalisew error" << SDL_GetError();
 			return false;
 		}
+
+		if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+		{
+			cout << "mixter couldnt init" << Mix_GetError();
+			return false;
+		}
 			//did window get created?
 		if (g_window == nullptr) 
 		{
@@ -113,6 +120,8 @@ bool InitSDL()
 			cout << " window failed, error" << SDL_GetError();
 			return false();
 		}
+
+		return true;
 	}
 }
 
@@ -127,18 +136,14 @@ void render()
 	
 }
 
-void loadmusic()
+void loadmusic(string path)
 {
 	g_music = Mix_LoadMUS(path.c_str());
 	if (g_music == nullptr)
 	{
 		cout << " couldnt load file" << Mix_GetError() << endl;
 	}
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
-	{
-		cout << "mixter couldnt init" << Mix_GetError();
-		return false;
-	}
+	
 
 }
 
