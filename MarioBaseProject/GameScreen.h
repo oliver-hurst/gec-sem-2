@@ -5,7 +5,8 @@ class GameScreen
 {
 protected:
 	SDL_Renderer* m_renderer;
-
+	SDL_Renderer* h_renderer;
+	
 
 public:
 	GameScreen(SDL_Renderer* renderer);

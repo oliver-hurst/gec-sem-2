@@ -173,6 +173,7 @@
     <ClCompile Include="GameScreenLevel1.cpp" />
     <ClCompile Include="GameScreenManager.cpp" />
     <ClCompile Include="gamescreenmenu.cpp" />
+    <ClCompile Include="koopa.cpp" />
     <ClCompile Include="levelmap.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Texture2D.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="GameScreenLevel1.h" />
     <ClInclude Include="GameScreenManager.h" />
     <ClInclude Include="gamescreenmenu.h" />
+    <ClInclude Include="koopa.h" />
     <ClInclude Include="levelmap.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Texture2D.h" />

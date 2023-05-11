@@ -11,6 +11,7 @@ class GameScreenManager
 private:
 	SDL_Renderer* m_renderer;
 	GameScreen* m_current_screen;
+	bool startscren;
 
 public:
 	GameScreenManager(SDL_Renderer* renderer, SCREENS startscreen);
